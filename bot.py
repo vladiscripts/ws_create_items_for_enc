@@ -85,9 +85,11 @@ class NewItemRobot(WikidataBot):
 
     def treat_page_and_item(self, page, item):
         """Treat page/item."""
+        title=page.title()
+        print('title')
         if self.filter_off(page, item):
             return
-        print(page.title())
+        print('filter done')
 
         page.p = Pagedata(page, self.enc_metas, self.prefixes)
         if page.p.is_bad:
