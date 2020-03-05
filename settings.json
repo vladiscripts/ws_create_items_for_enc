@@ -20,7 +20,7 @@
       }
     },
     "ВЭЛ": {
-      "active": false,
+      "active": true,
       "category_of_articles": "ВЭЛ:ВТ",
       "item_label": {
         "en": "entry in Military Encyclopedic Lexicon",
@@ -28,7 +28,7 @@
       }
     },
     "ГСС": {
-      "active": false,
+      "active": true,
       "category_of_articles": "ГСС:ДО",
       "item_label": {
         "en": "entry in Geographical statistical dictionary of the Russian Empire",
@@ -36,7 +36,7 @@
       }
     },
     "МСЭ2": {
-      "active": false,
+      "active": true,
       "category_of_articles": "МСЭ2",
       "item_label": {
         "en": "entry in Small Soviet Encyclopedia, 2nd edition",
@@ -44,7 +44,7 @@
       }
     },
     "НСТ": {
-      "active": false,
+      "active": true,
       "category_of_articles": "НСТ",
       "item_label": {
         "en": "entry in Toll's Desktop Dictionary",
@@ -52,7 +52,7 @@
       }
     },
     "НЭС": {
-      "active": false,
+      "active": true,
       "category_of_articles": "НЭС",
       "item_label": {
         "en": "entry in New Encyclopedic Dictionary, 1911—1916",
@@ -60,7 +60,7 @@
       }
     },
     "НЭСГ": {
-      "active": false,
+      "active": true,
       "category_of_articles": "НЭСГ",
       "item_label": {
         "en": "entry in Desktop Encyclopedic Dictionary",
@@ -68,7 +68,7 @@
       }
     },
     "ПБЭ": {
-      "active": false,
+      "active": true,
       "category_of_articles": "ПБЭ",
       "item_label": {
         "en": "entry in Orthodox Theological Encyclopedia",
@@ -76,7 +76,7 @@
       }
     },
     "ППБЭС": {
-      "active": false,
+      "active": true,
       "category_of_articles": "ППБЭС:ВТ",
       "item_label": {
         "en": "entry in Full Orthodox theological encyclopedia",
@@ -84,7 +84,7 @@
       }
     },
     "РЭСБ": {
-      "active": false,
+      "active": true,
       "category_of_articles": "РЭСБ",
       "item_label": {
         "en": "entry in Berezin's Russian Encyclopedic Dictionary",
@@ -92,7 +92,7 @@
       }
     },
     "ТЭ1": {
-      "active": false,
+      "active": true,
       "category_of_articles": "ТЭ1",
       "item_label": {
         "en": "entry in Technical Encyclopedia, 1st edition",
