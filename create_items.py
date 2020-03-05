@@ -40,7 +40,6 @@ from bot import NewItemRobot
 from vladi_helpers.file_helpers import json_save_to_file, json_load_from_file
 
 
-
 def main(args: list, settings: dict, prefixes: dict):
     """
     Process command line arguments and invoke bot.
