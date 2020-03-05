@@ -1,0 +1,111 @@
+{
+  "bot_enabled": true,
+  "lastedit_days": 0,
+  "pageage_days": 21,
+  "prefixes": {
+    "БСЭ1": {
+      "active": false,
+      "category_of_articles": "БСЭ1",
+      "item_label": {
+        "en": "entry in Great Soviet Encyclopedia, 1st edition (1926–1947)",
+        "ru": "статья в Большой советской энциклопедии, 1-е изд. (1926—1947)"
+      }
+    },
+    "БЭЮ": {
+      "active": false,
+      "category_of_articles": "БЭЮ",
+      "item_label": {
+        "en": "entry in Yuzhakov Big Encyclopedia",
+        "ru": "статья в Большой энциклопедии Южакова"
+      }
+    },
+    "ВЭЛ": {
+      "active": false,
+      "category_of_articles": "ВЭЛ:ВТ",
+      "item_label": {
+        "en": "entry in Military Encyclopedic Lexicon",
+        "ru": "статья в Военном энциклопедическом лексиконе"
+      }
+    },
+    "ГСС": {
+      "active": false,
+      "category_of_articles": "ГСС:ДО",
+      "item_label": {
+        "en": "entry in Geographical statistical dictionary of the Russian Empire",
+        "ru": "статья в Географическо-статистическом словаре Российской Империи"
+      }
+    },
+    "МСЭ2": {
+      "active": false,
+      "category_of_articles": "МСЭ2",
+      "item_label": {
+        "en": "entry in Small Soviet Encyclopedia, 2nd edition",
+        "ru": "статья в Малой советской энциклопедии, 2-м изд."
+      }
+    },
+    "НСТ": {
+      "active": false,
+      "category_of_articles": "НСТ",
+      "item_label": {
+        "en": "entry in Toll's Desktop Dictionary",
+        "ru": "статья в Настольном словаре Толля"
+      }
+    },
+    "НЭС": {
+      "active": false,
+      "category_of_articles": "НЭС",
+      "item_label": {
+        "en": "entry in New Encyclopedic Dictionary, 1911—1916",
+        "ru": "статья в Новом энциклопедическом словаре, 1911—1916"
+      }
+    },
+    "НЭСГ": {
+      "active": false,
+      "category_of_articles": "НЭСГ",
+      "item_label": {
+        "en": "entry in Desktop Encyclopedic Dictionary",
+        "ru": "статья в Настольном энциклопедическом словаре"
+      }
+    },
+    "ПБЭ": {
+      "active": false,
+      "category_of_articles": "ПБЭ",
+      "item_label": {
+        "en": "entry in Orthodox Theological Encyclopedia",
+        "ru": "статья в Православной богословской энциклопедии"
+      }
+    },
+    "ППБЭС": {
+      "active": false,
+      "category_of_articles": "ППБЭС:ВТ",
+      "item_label": {
+        "en": "entry in Full Orthodox theological encyclopedia",
+        "ru": "статья в Полном православном богословском энциклопедическом словаре"
+      }
+    },
+    "РЭСБ": {
+      "active": false,
+      "category_of_articles": "РЭСБ",
+      "item_label": {
+        "en": "entry in Berezin's Russian Encyclopedic Dictionary",
+        "ru": "статья в Русском энциклопедическом словаре Березина"
+      }
+    },
+    "ТЭ1": {
+      "active": false,
+      "category_of_articles": "ТЭ1",
+      "item_label": {
+        "en": "entry in Technical Encyclopedia, 1st edition",
+        "ru": "статья в Технической энциклопедии, 1-м изд."
+      }
+    },
+    "ЭСГ": {
+      "active": true,
+      "category_of_articles": "ЭСГ",
+      "item_label": {
+        "en": "entry in Granat Encyclopedic Dictionary",
+        "ru": "статья в энциклопедическом словаре Гранат"
+      }
+    }
+  }
+}
