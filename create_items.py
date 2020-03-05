@@ -13,7 +13,6 @@ import pywikibot
 from pywikibot import pagegenerators
 from create_items_bot import NewItemBot
 
-
 def main(args: list, settings: dict, prefixes: dict):
     """
     Process command line arguments and invoke bot.

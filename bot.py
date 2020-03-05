@@ -87,10 +87,12 @@ class NewItemRobot(WikidataBot):
         """Treat page/item."""
         if self.filter_off(page, item):
             return
+        print(page.title())
 
         page.p = Pagedata(page, self.enc_metas, self.prefixes)
         if page.p.is_bad:
             return
+        print('page.p done')
 
         data = self.make_item_header(page)
         claims = self.make_claims(page)
@@ -103,8 +105,9 @@ class NewItemRobot(WikidataBot):
             print('!!!!')
             return
         # pprint(vars(item))
+        print('add_claims...')
         self.add_claims(item, claims)
-        pass
+        print('add_claims done')
 
     def add_claims(self, item, claims):
         """Treat each page."""
@@ -204,8 +207,8 @@ class NewItemRobot(WikidataBot):
         if item and item.exists():
             pywikibot.output('{0} already has an item: {1}.'
                              .format(page, item))
-            if self.getOption('touch') is True:
-                self._touch_page(page)
+            # if self.getOption('touch') is True:
+            #     self._touch_page(page)
             return True
 
         if page.isRedirectPage():
