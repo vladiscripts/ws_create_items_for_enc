@@ -70,7 +70,7 @@ def main(args: list, settings: dict, prefixes: dict):
     return True
 
 
-def make_sql(lastedit_days):
+def make_sql(lastedit_days:int):
     x = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
     categories = ','.join(['"%s"' % d['category_of_articles'] for prefix, d in prefixes.items()])
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         pywikibot.error('not enabled encyclopedies to work, no prefixes actived')
         exit()
 
-    base_args = ['-family:wikisource', '-lang:ru', '-ns:0', '-format:"{page.can_title}"']
+    base_args = ['-family:wikisource', '-lang:ru', '-ns:0']  # '-format:"{page.can_title}"'
     args = [
         # '-summary:creating WD item',
         '-mysqlquery:%s' % make_sql(lastedit_days=settings["lastedit_days"]),
