@@ -1,28 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-This script creates new items on Wikidata based on certain criteria.
-
-* When was the (Wikipedia) page created?
-* When was the last edit on the page?
-* Does the page contain interwiki's?
-
-This script understands various command-line arguments:
-
--lastedit         The minimum number of days that has passed since the page was
-                  last edited.
-
--pageage          The minimum number of days that has passed since the page was
-                  created.
-
--touch            Do a null edit on every page which has a wikibase item.
-                  Be careful, this option can trigger edit rates or captachas
-                  if your account is not autoconfirmed.
-
-"""
-#
-# (C) Multichill, 2014
-# (C) Pywikibot team, 2014-2019
+# (C) Vladis13, 2020
+# (C) Pywikibot team, 2014-2020
 #
 # Distributed under the terms of the MIT license.
 #
@@ -91,14 +69,7 @@ def make_sql(lastedit_days: int):
             AND rev_timestamp < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL {lastedit_days} DAY)
     WHERE cw.cl_to IS NULL AND cr.cl_to IS NULL;
     """.replace('\n', ' ').strip()
-    # INNER JOIN revision ON page_latest = rev_id
-    #    AND rev_timestamp BETWEEN DATE_SUB(NOW(), INTERVAL {lastedit_days} DAY) AND NOW()
-
-    # AND NOT (page_title LIKE 'НСТ/%/ДО' OR page_title LIKE 'ЭСГ/%/ДО')
-    # AND cl_to IN ('ЭСГ', 'МСЭ2', 'РЭСБ', 'ТЭ1', 'НЭС', 'ППБЭС:ВТ', 'НСТ', 'ПБЭ', 'ВЭЛ:ВТ', 'НЭСГ', 'ГСС:ДО')
     return sql
-
-    # sql = 'SELECT  page_namespace,  page_title FROM ruwikisource_p.page limit 10;'
 
 
 def pagegenerator(args: List[str]):
@@ -126,7 +97,6 @@ if __name__ == '__main__':
     WS = pywikibot.Site(fam='wikisource', code='ru')
     j = pywikibot.Page(WS, 'MediaWiki:Настройки бота для создания элементов ВД.json')
     settings = json.loads(j.text)
-    # settings = json_load_from_file('settings.json')
     if not settings['bot_enabled']:
         pywikibot.error('exit, bot is disabled')
         exit()
@@ -136,17 +106,14 @@ if __name__ == '__main__':
         pywikibot.error('not enabled encyclopedies to work, no prefixes actived')
         exit()
 
-    base_args = ['-family:wikisource', '-lang:ru', '-ns:0']  # '-format:"{page.can_title}"'
+    base_args = ['-family:wikisource', '-lang:ru', '-ns:0']
     args = [
-        # '-summary:creating WD item',
         '-mysqlquery:%s' % make_sql(lastedit_days=settings["lastedit_days"]),
-        # '-file:pages.txt',
     ]
 
     args = base_args + args + sys.argv[1:]
 
     main(args, settings, prefixes)
-    # main(' '.join(args))
 
 # для settings.json
 # "pattern_of_disambig_in_item_description": "{note}. {main_description}",
