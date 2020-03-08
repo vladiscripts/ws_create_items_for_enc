@@ -59,21 +59,21 @@ class NewItemRobot(WikidataBot):
         """Only accepts options defined in availableOptions."""
         self.availableOptions.update({
             'always': True,
-            'lastedit_days': settings['lastedit_days'],
-            'pageage_days': settings['pageage_days'],
+            'lastedit_days': settings.get('lastedit_days'),
+            # 'pageage_days': settings.get('pageage_days', 0),
             'touch': 'newly',  # Can be False, newly (pages linked to newly
             # created items) or True (touch all pages)
         })
 
         super().__init__(**kwargs)
         self.generator = generator
-        self.pageAge = self.getOption('pageage_days')
+        # self.pageAge = self.getOption('pageage_days')
         self.lastEdit = self.getOption('lastedit_days')
-        self.pageAgeBefore = self.site.server_time() - timedelta(days=self.pageAge)
+        # self.pageAgeBefore = self.site.server_time() - timedelta(days=self.pageAge)
         self.lastEditBefore = self.site.server_time() - timedelta(days=self.lastEdit)
-        pywikibot.output('Page age is set to {0} days so only pages created'
-                         '\nbefore {1} will be considered.'
-                         .format(self.pageAge, self.pageAgeBefore.isoformat()))
+        # pywikibot.output('Page age is set to {0} days so only pages created'
+        #                  '\nbefore {1} will be considered.'
+        #                  .format(self.pageAge, self.pageAgeBefore.isoformat()))
         pywikibot.output(
             'Last edit is set to {0} days so only pages last edited'
             '\nbefore {1} will be considered.'.format(
@@ -222,11 +222,11 @@ class NewItemRobot(WikidataBot):
                 'Last edit on {0} was on {1}.\nToo recent. Skipping.'
                     .format(page, page.editTime().isoformat()))
             return True
-        if page.oldest_revision.timestamp > self.pageAgeBefore:
-            pywikibot.output(
-                'Page creation of {0} on {1} is too recent. Skipping.'
-                    .format(page, page.editTime().isoformat()))
-            return True
+        # if page.oldest_revision.timestamp > self.pageAgeBefore:
+        #     pywikibot.output(
+        #         'Page creation of {0} on {1} is too recent. Skipping.'
+        #             .format(page, page.editTime().isoformat()))
+        #     return True
         if page.isCategoryRedirect():
             pywikibot.output('{0} is a category redirect. Skipping.'
                              .format(page))

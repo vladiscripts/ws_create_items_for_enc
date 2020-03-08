@@ -1,7 +1,7 @@
 {
   "bot_enabled": true,
-  "lastedit_days": 0,
-  "pageage_days": 21,
+  "lastedit_days": 3,
+  "pageage_days": 0,
   "prefixes": {
     "БСЭ1": {
       "active": false,
