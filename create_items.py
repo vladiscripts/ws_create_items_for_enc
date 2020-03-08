@@ -78,15 +78,22 @@ def make_sql(lastedit_days:int):
     sql = f"""
     SELECT page_namespace,  page_title
     FROM ruwikisource_p.page
-        JOIN ruwikisource_p.categorylinks ON cl_from = page_id
-            AND cl_to IN ({categories})
+        JOIN ruwikisource_p.categorylinks 
+            ON cl_from = page_id
             AND page_namespace = 0 
-    LEFT JOIN ruwikisource_p.categorylinks cw ON cw.cl_from = page_id
-        AND cw.cl_to = "Викиданные:Страницы_с_элементами"
-    LEFT JOIN ruwikisource_p.categorylinks cr ON cr.cl_from = page_id
-        AND cr.cl_to LIKE "%еренаправлени%"
+            AND cl_to IN ({categories})
+            AND page_is_redirect = 0
+        LEFT JOIN ruwikisource_p.categorylinks cw 
+            ON cw.cl_from = page_id
+            AND cw.cl_to = "Викиданные:Страницы_с_элементами"
+        LEFT JOIN ruwikisource_p.categorylinks cr 
+            ON cr.cl_from = page_id
+            AND cr.cl_to LIKE "%еренаправлени%"
+        JOIN revision
+            ON page_latest = rev_id
+            AND rev_timestamp < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL {lastedit_days} DAY)
     WHERE cw.cl_to IS NULL AND cr.cl_to IS NULL;
-    """
+    """.replace('\n', ' ').strip()
     # INNER JOIN revision ON page_latest = rev_id
     #    AND rev_timestamp BETWEEN DATE_SUB(NOW(), INTERVAL {lastedit_days} DAY) AND NOW()
 
