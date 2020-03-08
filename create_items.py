@@ -126,10 +126,10 @@ def pagegenerator(args: List[str]):
 
 if __name__ == '__main__':
 
-    # WS = pywikibot.Site(fam='wikisource', code='ru')
-    # j = pywikibot.Page(WS, 'MediaWiki:Настройки бота для создания элементов ВД.json')
-    # settings = json.loads(j.text)
-    settings = json_load_from_file('settings.json')
+    WS = pywikibot.Site(fam='wikisource', code='ru')
+    j = pywikibot.Page(WS, 'MediaWiki:Настройки бота для создания элементов ВД.json')
+    settings = json.loads(j.text)
+    # settings = json_load_from_file('settings.json')
     if not settings['bot_enabled']:
         pywikibot.error('exit, bot is disabled')
         exit()
