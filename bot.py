@@ -1,12 +1,10 @@
 from __future__ import absolute_import, division, unicode_literals
 from datetime import timedelta
-from textwrap import fill
 import json
 import re
 import pywikibot
-from pywikibot.bot import WikidataBot, SingleSiteBot
+from pywikibot.bot import WikidataBot
 from pywikibot.exceptions import (LockedPage, NoCreateError, NoPage, PageNotSaved)
-from pprint import pprint
 import logger
 
 logger = logger.get_logger("bot")
@@ -259,8 +257,6 @@ class NewItemRobot(WikidataBot):
 
 
 def get_enc_metas(WS, WD):
-    # other_sources = parse_lua_to_dict(WD_utils.WS, 'Модуль:Другие источники', 'otherSources')
-    # wikiprojects = parse_lua_to_dict(self.wd.WD, 'Модуль:Навигация-мини', 'projects')
     j = pywikibot.Page(WS, 'MediaWiki:Encyclopedias_settings.json')
     other_sources = json.loads(j.text)
     enc_metas = {}
