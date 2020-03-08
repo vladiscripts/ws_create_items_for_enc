@@ -27,17 +27,14 @@ This script understands various command-line arguments:
 # Distributed under the terms of the MIT license.
 #
 from __future__ import absolute_import, division, unicode_literals
-from datetime import timedelta
 from textwrap import fill
 import sys
 import json
-import re
 import datetime, pytz
 from typing import List
 import pywikibot
 from pywikibot import pagegenerators
 from bot import NewItemRobot
-from vladi_helpers.file_helpers import json_save_to_file, json_load_from_file
 
 
 def main(args: list, settings: dict, prefixes: dict):
@@ -70,7 +67,7 @@ def main(args: list, settings: dict, prefixes: dict):
     return True
 
 
-def make_sql(lastedit_days:int):
+def make_sql(lastedit_days: int):
     x = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
     categories = ','.join(['"%s"' % d['category_of_articles'] for prefix, d in prefixes.items()])
