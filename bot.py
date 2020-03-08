@@ -85,31 +85,31 @@ class NewItemRobot(WikidataBot):
 
     def treat_page_and_item(self, page, item):
         """Treat page/item."""
-        title=page.title()
-        print('title')
+        title = page.title()
+        # pywikibot.stdout(title)
         if self.filter_off(page, item):
             return
-        print('filter done')
+        # pywikibot.stdout('filter done')
 
         page.p = Pagedata(page, self.enc_metas, self.prefixes)
         if page.p.is_bad:
             return
-        print('page.p done')
+        pywikibot.stdout('page.p done')
 
         data = self.make_item_header(page)
         claims = self.make_claims(page)
 
         item = self.create_item_for_page(page, data=data, callback=lambda _, exc: self._callback(page, exc))
-        if not (item or item.exists()):
-            print('!!!!')
-            return
-        if item is None:
-            print('!!!!')
-            return
+        # if not (item and item.exists()):
+        #     pywikibot.debug('!!!!')
+        #     return
+        # if item is None:
+        #     pywikibot.stdout('!!!!')
+        #     return
         # pprint(vars(item))
-        print('add_claims...')
+        # pywikibot.stdout('add_claims...')
         self.add_claims(item, claims)
-        print('add_claims done')
+        # pywikibot.stdout('add_claims done')
 
     def add_claims(self, item, claims):
         """Treat each page."""
