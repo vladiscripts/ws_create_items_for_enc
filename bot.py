@@ -58,20 +58,14 @@ class NewItemRobot(WikidataBot):
         self.availableOptions.update({
             'always': True,
             'lastedit_days': settings.get('lastedit_days'),
-            # 'pageage_days': settings.get('pageage_days', 0),
             'touch': 'newly',  # Can be False, newly (pages linked to newly
             # created items) or True (touch all pages)
         })
 
         super().__init__(**kwargs)
         self.generator = generator
-        # self.pageAge = self.getOption('pageage_days')
         self.lastEdit = self.getOption('lastedit_days')
-        # self.pageAgeBefore = self.site.server_time() - timedelta(days=self.pageAge)
         self.lastEditBefore = self.site.server_time() - timedelta(days=self.lastEdit)
-        # pywikibot.output('Page age is set to {0} days so only pages created'
-        #                  '\nbefore {1} will be considered.'
-        #                  .format(self.pageAge, self.pageAgeBefore.isoformat()))
         pywikibot.output(
             'Last edit is set to {0} days so only pages last edited'
             '\nbefore {1} will be considered.'.format(
@@ -83,11 +77,8 @@ class NewItemRobot(WikidataBot):
 
     def treat_page_and_item(self, page, item):
         """Treat page/item."""
-        title = page.title()
-        # pywikibot.stdout(title)
         if self.filter_off(page, item):
             return
-        # pywikibot.stdout('filter done')
 
         page.p = Pagedata(page, self.enc_metas, self.prefixes)
         if page.p.is_bad:
@@ -98,16 +89,7 @@ class NewItemRobot(WikidataBot):
         claims = self.make_claims(page)
 
         item = self.create_item_for_page(page, data=data, callback=lambda _, exc: self._callback(page, exc))
-        # if not (item and item.exists()):
-        #     pywikibot.debug('!!!!')
-        #     return
-        # if item is None:
-        #     pywikibot.stdout('!!!!')
-        #     return
-        # pprint(vars(item))
-        # pywikibot.stdout('add_claims...')
         self.add_claims(item, claims)
-        # pywikibot.stdout('add_claims done')
 
     def add_claims(self, item, claims):
         """Treat each page."""
@@ -148,22 +130,8 @@ class NewItemRobot(WikidataBot):
         RU = 'ru'
         data = {
             'labels': {RU: {'language': RU, 'value': p.pagename.replace('/ДО', '').replace('/ВТ', '')}},
-            # p.pagename_spaceaboutslashes
-            'descriptions': {},  # {'en': 'encyclopedic article', 'ru': f'энциклопедическая статья'},
-            'aliases': {RU: [p.article_title]},
-            # 'sitelinks': [{'site': 'enwiki', 'title': 'Douglas Adams'}]
-        }
-
-        for lng in ['en', RU]:
-            data['descriptions'][lng] = p.item_label[lng]
-            # уточнение в descriptions
-            # if p.disambig_note:
-            #     data['descriptions'][lng] = self.pattern_of_disambig_in_item_description \
-            #         .format(note=p.disambig_note, main_description=p.item_label[lng])
-            # else:
-            #     data['descriptions'][lng] = p.item_label[lng]
-        # if p.article_title_no_disambig:
-        #     data['aliases'][RU].append(p.article_title_no_disambig)
+            'descriptions': {lng: p.item_label[lng] for lng in ['en', RU]},
+            'aliases': {RU: [p.article_title]}}
         return data
 
     def make_claims(self, page) -> list:
@@ -176,8 +144,6 @@ class NewItemRobot(WikidataBot):
         ]
 
         claims = []
-        # repo = pywikibot.Site().data_repository()
-        # for i in range(0, len(commandline_claims), 2):
         for pid, value in properties:
             claim = pywikibot.Claim(self.repo, pid)
             if claim.type == 'wikibase-item':
@@ -186,7 +152,7 @@ class NewItemRobot(WikidataBot):
                 target = value
             elif claim.type == 'monolingualtext':
                 lang, string = value
-                target = pywikibot.WbMonolingualText(string, lang)  # .toWikibase()
+                target = pywikibot.WbMonolingualText(string, lang)
             elif claim.type == 'globe-coordinate':
                 coord_args = [
                     float(c) for c in value.split(',')]
@@ -207,8 +173,6 @@ class NewItemRobot(WikidataBot):
         if item and item.exists():
             pywikibot.output('{0} already has an item: {1}.'
                              .format(page, item))
-            # if self.getOption('touch') is True:
-            #     self._touch_page(page)
             return True
 
         if page.isRedirectPage():
@@ -220,11 +184,6 @@ class NewItemRobot(WikidataBot):
                 'Last edit on {0} was on {1}.\nToo recent. Skipping.'
                     .format(page, page.editTime().isoformat()))
             return True
-        # if page.oldest_revision.timestamp > self.pageAgeBefore:
-        #     pywikibot.output(
-        #         'Page creation of {0} on {1} is too recent. Skipping.'
-        #             .format(page, page.editTime().isoformat()))
-        #     return True
         if page.isCategoryRedirect():
             pywikibot.output('{0} is a category redirect. Skipping.'
                              .format(page))
@@ -261,7 +220,7 @@ def get_enc_metas(WS, WD):
     other_sources = json.loads(j.text)
     enc_metas = {}
     for n in other_sources:
-        n['wditem'] = pywikibot.ItemPage(WD, n['id'])  # todo
+        n['wditem'] = pywikibot.ItemPage(WD, n['id'])
         pname = n['argument']
         enc_metas[pname] = n
     return enc_metas
