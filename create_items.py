@@ -48,7 +48,7 @@ def main(args: list, settings: dict, prefixes: dict):
 def make_sql(lastedit_days: int):
     x = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
 
-    categories = ','.join(['"%s"' % d['category_of_articles'] for prefix, d in prefixes.items()])
+    categories = ','.join(['"%s"' % d['category_of_articles'].replace(' ', '_') for prefix, d in prefixes.items()])
     #  'БЭЮ', 'БСЭ1' мелкие словарные статьи или масса перенаправлений
     sql = f"""
     SELECT page_namespace,  page_title
@@ -56,7 +56,7 @@ def make_sql(lastedit_days: int):
         JOIN ruwikisource_p.categorylinks 
             ON cl_from = page_id
             AND page_namespace = 0 
-            AND cl_to IN ({categories})
+            AND cl_to IN ({categories.replace(' ', '_')})
             AND page_is_redirect = 0
         LEFT JOIN ruwikisource_p.categorylinks cw 
             ON cw.cl_from = page_id
