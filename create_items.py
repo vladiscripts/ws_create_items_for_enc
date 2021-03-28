@@ -83,7 +83,7 @@ def pagegenerator(args: List[str]):
         if arg.startswith(('-pageage_days:', '-lastedit_days:')):
             key, val = arg.split(':', 1)
             options[key[1:]] = int(val)
-        elif gen_factory.handleArg(arg):
+        elif gen_factory.handle_arg(arg):
             pass
         else:
             options[arg[1:].lower()] = True
