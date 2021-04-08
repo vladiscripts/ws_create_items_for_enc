@@ -64,7 +64,7 @@ class NewItemRobot(WikidataBot):
 
         super().__init__(**kwargs)
         self.generator = generator
-        self.lastEdit = self.getOption('lastedit_days')
+        self.lastEdit = self.opt['lastedit_days']
         self.lastEditBefore = self.site.server_time() - timedelta(days=self.lastEdit)
         pywikibot.output(
             'Last edit is set to {0} days so only pages last edited'
@@ -211,7 +211,7 @@ class NewItemRobot(WikidataBot):
                 page.title(as_link=True)))
 
     def _callback(self, page, exc):
-        if exc is None and self.getOption('touch'):
+        if exc is None and self.opt['touch']:
             self._touch_page(page)
 
 
