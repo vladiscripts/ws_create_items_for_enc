@@ -4,7 +4,7 @@ import json
 import re
 import pywikibot
 from pywikibot.bot import WikidataBot
-from pywikibot.exceptions import (LockedPage, NoCreateError, NoPage, PageNotSaved)
+from pywikibot.exceptions import (LockedPage, NoCreateError, NoPage, PageSaveRelatedError)
 import logger
 
 logger = logger.get_logger("bot")
@@ -206,7 +206,7 @@ class NewItemRobot(WikidataBot):
         except LockedPage:
             pywikibot.error('Page {0} is locked.'.format(
                 page.title(as_link=True)))
-        except PageNotSaved:
+        except PageSaveRelatedError:
             pywikibot.error('Page {0} not saved.'.format(
                 page.title(as_link=True)))
 
