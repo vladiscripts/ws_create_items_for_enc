@@ -68,8 +68,7 @@ class NewItemRobot(WikidataBot):
         self.lastEditBefore = self.site.server_time() - timedelta(days=self.lastEdit)
         pywikibot.output(
             'Last edit is set to {0} days so only pages last edited'
-            '\nbefore {1} will be considered.'.format(
-                self.lastEdit, self.lastEditBefore.isoformat()))
+            '\nbefore {1} will be considered.'.format(self.lastEdit, self.lastEditBefore.isoformat()))
         self.enc_metas = get_enc_metas(self.site, self.repo)
         # self.prefixes = settings['prefixes']
         self.prefixes = prefixes
@@ -105,8 +104,7 @@ class NewItemRobot(WikidataBot):
         """
         if not summary:
             # FIXME: i18n
-            summary = ('Bot: New item with sitelink from %s'
-                       % page.title(as_link=True, insite=self.repo))
+            summary = ('Bot: New item with sitelink from %s' % page.title(as_link=True, insite=self.repo))
 
         if data is None:
             data = {}
@@ -154,25 +152,21 @@ class NewItemRobot(WikidataBot):
                 lang, string = value
                 target = pywikibot.WbMonolingualText(string, lang)
             elif claim.type == 'globe-coordinate':
-                coord_args = [
-                    float(c) for c in value.split(',')]
+                coord_args = [float(c) for c in value.split(',')]
                 if len(coord_args) >= 3:
                     precision = coord_args[2]
                 else:
                     precision = 0.0001  # Default value (~10 m at equator)
-                target = pywikibot.Coordinate(
-                    coord_args[0], coord_args[1], precision=precision)
+                target = pywikibot.Coordinate(coord_args[0], coord_args[1], precision=precision)
             else:
-                raise NotImplementedError(
-                    '{} datatype is not yet supported by claimit.py'.format(claim.type))
+                raise NotImplementedError('{} datatype is not yet supported by claimit.py'.format(claim.type))
             claim.setTarget(target)
             claims.append(claim)
         return claims
 
     def filter_off(self, page, item) -> bool:
         if item and item.exists():
-            pywikibot.output('{0} already has an item: {1}.'
-                             .format(page, item))
+            pywikibot.output('{0} already has an item: {1}.'.format(page, item))
             return True
 
         if page.isRedirectPage():
@@ -181,12 +175,10 @@ class NewItemRobot(WikidataBot):
 
         if page.editTime() > self.lastEditBefore:
             pywikibot.output(
-                'Last edit on {0} was on {1}.\nToo recent. Skipping.'
-                    .format(page, page.editTime().isoformat()))
+                'Last edit on {0} was on {1}.\nToo recent. Skipping.'.format(page, page.editTime().isoformat()))
             return True
         if page.isCategoryRedirect():
-            pywikibot.output('{0} is a category redirect. Skipping.'
-                             .format(page))
+            pywikibot.output('{0} is a category redirect. Skipping.'.format(page))
             return True
         if page.langlinks():
             # FIXME: Implement this
@@ -201,14 +193,11 @@ class NewItemRobot(WikidataBot):
             pywikibot.output('Doing a null edit on the page.')
             page.touch()
         except (NoCreateError, NoPage):
-            pywikibot.error('Page {0} does not exist.'.format(
-                page.title(as_link=True)))
+            pywikibot.error('Page {0} does not exist.'.format(page.title(as_link=True)))
         except LockedPage:
-            pywikibot.error('Page {0} is locked.'.format(
-                page.title(as_link=True)))
+            pywikibot.error('Page {0} is locked.'.format(page.title(as_link=True)))
         except PageSaveRelatedError:
-            pywikibot.error('Page {0} not saved.'.format(
-                page.title(as_link=True)))
+            pywikibot.error('Page {0} not saved.'.format(page.title(as_link=True)))
 
     def _callback(self, page, exc):
         if exc is None and self.opt['touch']:
