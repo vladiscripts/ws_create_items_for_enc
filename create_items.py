@@ -31,7 +31,7 @@ def main(args: list, settings: dict, prefixes: dict):
 
     bot = NewItemRobot(generator, settings, prefixes, **options)
     user = pywikibot.User(bot.site, bot.site.username())
-    if bot.getOption('touch') == 'newly' \
+    if bot.opt['touch'] == 'newly' \
             and 'autoconfirmed' not in user.groups():
         pywikibot.warning(fill(
             'You are logged in as {}, an account that is '
