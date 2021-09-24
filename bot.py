@@ -55,7 +55,7 @@ class NewItemRobot(WikidataBot):
 
     def __init__(self, generator, settings: dict, prefixes: dict, **kwargs):
         """Only accepts options defined in availableOptions."""
-        self.availableOptions.update({
+        self.available_options.update({
             'always': True,
             'lastedit_days': settings.get('lastedit_days'),
             'touch': 'newly',  # Can be False, newly (pages linked to newly
