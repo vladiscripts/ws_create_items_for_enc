@@ -4,7 +4,7 @@ import json
 import re
 import pywikibot
 from pywikibot.bot import WikidataBot
-from pywikibot.exceptions import (LockedPage, NoCreateError, NoPage, PageSaveRelatedError)
+from pywikibot.exceptions import (LockedPageError, NoCreateError, NoPageError, PageSaveRelatedError)
 import logger
 
 logger = logger.get_logger("bot")
@@ -192,9 +192,9 @@ class NewItemRobot(WikidataBot):
         try:
             pywikibot.output('Doing a null edit on the page.')
             page.touch()
-        except (NoCreateError, NoPage):
+        except (NoCreateError, NoPageError):
             pywikibot.error('Page {0} does not exist.'.format(page.title(as_link=True)))
-        except LockedPage:
+        except LockedPageError:
             pywikibot.error('Page {0} is locked.'.format(page.title(as_link=True)))
         except PageSaveRelatedError:
             pywikibot.error('Page {0} not saved.'.format(page.title(as_link=True)))
