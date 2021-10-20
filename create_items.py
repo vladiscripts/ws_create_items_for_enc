@@ -12,7 +12,7 @@ import datetime, pytz
 from typing import List
 import pywikibot
 from pywikibot import pagegenerators
-from bot import NewItemRobot
+from create_items_bot import NewItemBot
 
 
 def main(args: list, settings: dict, prefixes: dict):
@@ -29,7 +29,7 @@ def main(args: list, settings: dict, prefixes: dict):
         pywikibot.bot.suggest_help(missing_generator=True)
         return False
 
-    bot = NewItemRobot(generator, settings, prefixes, **options)
+    bot = NewItemBot(generator, settings, prefixes, **options)
     user = pywikibot.User(bot.site, bot.site.username())
     if bot.opt['touch'] == 'newly' and 'autoconfirmed' not in user.groups():
         pywikibot.warning(fill(

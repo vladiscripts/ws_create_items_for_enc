@@ -48,7 +48,7 @@ class Pagedata:
             self.disambig_note = m.group(2).strip()
 
 
-class NewItemRobot(WikidataBot):
+class NewItemBot(WikidataBot):
     """A bot to create new items."""
 
     treat_missing_item = True
