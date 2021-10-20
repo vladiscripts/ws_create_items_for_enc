@@ -36,7 +36,7 @@ import datetime, pytz
 from typing import List
 import pywikibot
 from pywikibot import pagegenerators
-from bot import NewItemRobot
+from create_items_bot import NewItemBot
 from vladi_helpers.file_helpers import json_save_to_file, json_load_from_file
 
 

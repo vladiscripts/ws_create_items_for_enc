@@ -37,9 +37,9 @@ class TestProblem1(unittest.TestCase):
         page.p = bot.Pagedata(page, self.enc_metas, self.prefixes)
 
         # create_items.main(args, self.settings, self.prefixes)
-        b = bot.NewItemRobot
+        b = bot.NewItemBot
         b.pattern_of_disambig_in_item_description = self.settings['pattern_of_disambig_in_item_description']
-        data = b.make_item_header(bot.NewItemRobot, page)
+        data = b.make_item_header(bot.NewItemBot, page)
         print()
 
     @unittest.skip("skipping")
