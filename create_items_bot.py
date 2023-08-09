@@ -173,7 +173,7 @@ class NewItemBot(WikidataBot):
             pywikibot.output('{0} is a redirect page. Skipping.'.format(page))
             return True
 
-        if page.editTime() > self.lastEditBefore:
+        if page.latest_revision.timestamp > self.lastEditBefore:
             pywikibot.output(
                 'Last edit on {0} was on {1}.\nToo recent. Skipping.'.format(page, page.editTime().isoformat()))
             return True
