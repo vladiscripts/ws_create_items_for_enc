@@ -67,8 +67,8 @@ class NewItemBot(WikidataBot):
         self.lastEdit = self.opt['lastedit_days']
         self.lastEditBefore = self.site.server_time() - timedelta(days=self.lastEdit)
         pywikibot.output(
-            'Last edit is set to {0} days so only pages last edited'
-            '\nbefore {1} will be considered.'.format(self.lastEdit, self.lastEditBefore.isoformat()))
+            'Last edit is set to {0} days, so only pages last edited '
+            'before {1} will be considered.'.format(self.lastEdit, self.lastEditBefore.isoformat()))
         self.enc_metas = get_enc_metas(self.site, self.repo)
         # self.prefixes = settings['prefixes']
         self.prefixes = prefixes
@@ -88,7 +88,8 @@ class NewItemBot(WikidataBot):
         claims = self.make_claims(page)
 
         item = self.create_item_for_page(page, data=data, callback=lambda _, exc: self._callback(page, exc))
-        self.add_claims(item, claims)
+        if item:
+            self.add_claims(item, claims)
 
     def add_claims(self, item, claims):
         """Treat each page."""
@@ -119,9 +120,8 @@ class NewItemBot(WikidataBot):
         kwargs.setdefault('show_diff', False)
         result = self.user_edit_entity(item, data, summary=summary, **kwargs)
         if result:
-            return item
-        else:
-            return None
+            if item.id != '-1':
+                return item
 
     def make_item_header(self, page) -> dict:
         p = page.p
