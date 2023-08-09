@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, unicode_literals
 from textwrap import fill
 import sys
 import json
-import datetime, pytz
+import datetime
 from typing import List
 import pywikibot
 from pywikibot import pagegenerators
