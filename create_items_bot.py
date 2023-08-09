@@ -76,7 +76,7 @@ class NewItemBot(WikidataBot):
 
     def treat_page_and_item(self, page, item):
         """Treat page/item."""
-        if self.filter_off(page, item):
+        if self.filter_out(page, item):
             return
 
         page.p = Pagedata(page, self.enc_metas, self.prefixes)
@@ -164,7 +164,7 @@ class NewItemBot(WikidataBot):
             claims.append(claim)
         return claims
 
-    def filter_off(self, page, item) -> bool:
+    def filter_out(self, page, item) -> bool:
         if item and item.exists():
             pywikibot.output('{0} already has an item: {1}.'.format(page, item))
             return True

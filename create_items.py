@@ -93,6 +93,10 @@ def pagegenerator(args: List[str]):
 
 if __name__ == '__main__':
 
+    """ для локального запуска запустить:
+    ssh -L 4712:ruwikisource.web.db.svc.wikimedia.cloud:3306 vladi2016@login.toolforge.org -i "/home/vladislav/.ssh/id_rsa"
+    """
+
     WS = pywikibot.Site(fam='wikisource', code='ru')
     j = pywikibot.Page(WS, 'MediaWiki:Настройки бота для создания элементов ВД.json')
     settings = json.loads(j.text)
@@ -102,7 +106,7 @@ if __name__ == '__main__':
 
     prefixes = {prefix: d for prefix, d in settings['prefixes'].items() if d['active']}
     if not prefixes:
-        pywikibot.error('not enabled encyclopedies to work, no prefixes actived')
+        pywikibot.error('no enabled encyclopedies to work, no prefixes actived')
         exit()
 
     base_args = ['-family:wikisource', '-lang:ru', '-ns:0']
