@@ -32,7 +32,7 @@ from textwrap import fill
 import sys
 import json
 import re
-import datetime, pytz
+import datetime
 from typing import List
 import pywikibot
 from pywikibot import pagegenerators
