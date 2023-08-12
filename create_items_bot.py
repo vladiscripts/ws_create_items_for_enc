@@ -11,18 +11,22 @@ logger = logger.get_logger("bot")
 
 
 class Pagedata:
+    is_bad = False
+
     def __init__(self, page, enc_metas, prefixes):
         self.pagename = page.title()
         self.pagename_spaceaboutslashes = self.pagename.replace('/', ' / ')
         self.rootpagename, _, self.subpagename = self.pagename.partition('/')
-        prefix_settings = prefixes[self.rootpagename]
+        prefix_settings = prefixes.get(self.rootpagename)
+        if not prefix_settings:
+            self.is_bad = True
+            return
         # self.active = prefix_settings["active"]
         self.category_of_articles = prefix_settings["category_of_articles"]
         self.item_label = prefix_settings["item_label"]
         self.enc_meta = enc_metas[self.rootpagename]
         self.is_oldorph = True if '/ДО' in self.pagename else False
         self.pagename_pattern = self.enc_meta['titleDO'] if self.is_oldorph else self.enc_meta['titleVT']
-        self.is_bad = False
         if ':ДО' in self.category_of_articles and not '/ДО' in self.pagename:
             logger.warning('категория ДО, но нет /ДО в названии страницы, пропускаем')
             self.is_bad = True
@@ -87,7 +91,8 @@ class NewItemBot(WikidataBot):
         data = self.make_item_header(page)
         claims = self.make_claims(page)
 
-        item = self.create_item_for_page(page, data=data, callback=lambda _, exc: self._callback(page, exc))
+        item = self.create_item_for_page(page, data=data, callback=lambda _, exc: self._callback(page, exc),
+                                         asynchronous=False)
         if item:
             self.add_claims(item, claims)
 
@@ -120,8 +125,8 @@ class NewItemBot(WikidataBot):
         kwargs.setdefault('show_diff', False)
         result = self.user_edit_entity(item, data, summary=summary, **kwargs)
         if result:
-            if item.id != '-1':
-                return item
+            return item
+        return None
 
     def make_item_header(self, page) -> dict:
         p = page.p
