@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.idea/
+script/test/
+venv
+*~
+*.sqlite*
+*.log
+*.csv
+*.json
+*.png
+*.xls*
+*.zip
