@@ -1,9 +1,9 @@
 import unittest
-import re
-from datetime import datetime, timezone
-import pathlib
+# import re
+# from datetime import datetime, timezone
+# import pathlib
 import pywikibot
-from pywikibot import pagegenerators
+# from pywikibot import pagegenerators
 from vladi_helpers.file_helpers import json_load_from_file, json_save_to_file, file_save, pickle_save_to_file, \
     pickle_load_from_file
 import bot, create_items

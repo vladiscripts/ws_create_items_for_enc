@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 from __future__ import absolute_import, division, unicode_literals
-from datetime import timedelta
-from textwrap import fill
+# from datetime import timedelta
+# from textwrap import fill
 import json
 import re
 import pywikibot
 from pywikibot.bot import WikidataBot, SingleSiteBot
 from pywikibot.exceptions import (LockedPage, NoCreateError, NoPage, PageNotSaved)
 from pywikibot import pagegenerators
-from pprint import pprint
+# from pprint import pprint
 from typing import List
 import sys
 # import datetime, pytz
@@ -224,7 +224,7 @@ def main(args: list, settings: dict, prefixes: dict):
 
     bot = ItemEditorRobot(generator, settings, prefixes, **options)
     bot.add_only_property_by_pagelist = add_only_property_by_pagelist
-    user = pywikibot.User(bot.site, bot.site.username())
+    # user = pywikibot.User(bot.site, bot.site.username())
     bot.run()
     return True
 
